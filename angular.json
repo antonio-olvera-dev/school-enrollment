@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "school-enrollment"
+    }
+  },
+  "defaultProject": "school-enrollment",
+  "cli": {
+    "analytics": false
+  }
 }
