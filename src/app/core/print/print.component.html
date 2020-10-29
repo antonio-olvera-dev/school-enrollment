@@ -1,1 +1,20 @@
-<p>print works!</p>
+<section *ngIf="!block">
+
+    <ul class="list-group" *ngFor="let student of students; i as index">
+
+        <li class="list-group-item">Nombre: {{student.name}}</li>
+        <li class="list-group-item">Apellido: {{student.lastname}}</li>
+        <li class="list-group-item">Dni: {{student.dni}}</li>
+        <li class="list-group-item">Teléfono: {{student.phone}}</li>
+        <li class="list-group-item">Calle: {{student.street}}</li>
+        <li class="list-group-item">Número: {{student.number}}</li>
+        <li class="list-group-item">Ciudad: {{student.city}}</li>
+        <li class="list-group-item">Email: {{student.email}}</li>
+        
+        <li class="list-group-item" style="font-weight: 600;">Asignaturas</li>
+        <li *ngFor="let sub of student.subjects" class="list-group-item">{{sub}}</li>
+    </ul>
+
+
+
+</section>

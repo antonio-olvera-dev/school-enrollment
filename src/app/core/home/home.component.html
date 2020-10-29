@@ -1,0 +1,113 @@
+<!-- 
+Crea un formulario reactivo para dar de alta a los alumnos de una escuela. Debes registrar su nombre, apellidos, DNI, teléfono, dirección (calle, número y ciudad), y el email donde recibirán todas las comunicaciones de la escuela.
+
+Además, debe haber un campo “asignaturas” donde podamos añadir todas las asignaturas de las que se haya matriculado el alumno.
+
+Para prevenir problemas de seguridad, verifica que el email con el que se registran no contiene las palabras prohibidas “admin”, “root” y “sysadmin”. -->
+
+
+
+<main class="sice">
+
+
+    <div class="container">
+        <form autocomplete="off" [formGroup]="forma" (submit)="saveForm()">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" class="form-control" formControlName="name"
+                [ngClass]="{'is-valid': validName, 'is-invalid': invalidName}"
+                >
+                <small *ngIf="invalidName" if class="form-text text-muted">Este campo debe de tener al menos 3 caractéres</small>
+            </div>
+
+            <div class="form-group">
+                <label>Apellidos</label>
+                <input type="text" class="form-control" formControlName="lastname"
+                [ngClass]="{'is-valid': validLastname, 'is-invalid': invalidLastname}">
+                <small *ngIf="invalidLastname" class="form-text text-muted">Este campo debe de tener al menos 3 caractéres</small>
+            </div>
+
+            <div class="form-group">
+                <label>Dni</label>
+                <input type="text" class="form-control" formControlName="dni"
+                [ngClass]="{'is-valid': validDni, 'is-invalid': invalidDni}">
+                <small *ngIf="invalidDni" class="form-text text-muted">Este campo debe de tener al menos 9 caractéres</small>
+            </div>
+
+            <div class="form-group">
+                <label>Teléfono</label>
+                <input type="number" class="form-control" formControlName="phone"
+                [ngClass]="{'is-valid': validPhone, 'is-invalid': invalidPhone}">
+                <small *ngIf="invalidPhone" class="form-text text-muted">Este campo debe de tener al menos 9 caractéres  y solo se admiten números</small>
+            </div>
+
+            <div formGroupName="adress">
+                <div class="form-group">
+                    <label>Calle</label>
+                    <input type="text" class="form-control" formControlName="street"
+                    [ngClass]="{'is-valid': validStreet, 'is-invalid': invalidStreet}">
+                    <small *ngIf="invalidStreet" class="form-text text-muted">Este campo debe de tener al menos 3 caractéres</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Numero</label>
+                    <input type="text" class="form-control" formControlName="number"
+                    [ngClass]="{'is-valid': validNumber, 'is-invalid': invalidNumber}">
+                    <small *ngIf="invalidNumber" class="form-text text-muted">Este campo debe de tener al menos 3 caractéres</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Ciudad</label>
+                    <input type="text" class="form-control" formControlName="city"
+                    [ngClass]="{'is-valid': validCity, 'is-invalid': invalidCity}">
+                    <small *ngIf="invalidCity" class="form-text text-muted">Este campo debe de tener al menos 3 caractéres</small>
+                </div>
+
+
+            </div>
+
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" formControlName="email"
+                [ngClass]="{'is-valid': validEmail, 'is-invalid': invalidEmail}">
+                <small *ngIf="invalidEmail" class="form-text text-muted">El correo electrónico debe de ser válido, y no puede contener las siguientes palabras: “admin”, “root” y “sysadmin”</small>
+            </div>
+
+
+            <table formArrayName="subjects" class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Asignaturas</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+
+                  </tr>
+                </thead>
+                <tbody *ngFor="let subjet of getSubject.controls;index as i" >
+                  <tr>
+                    <th scope="row">{{i+1}}</th>
+                    <th scope="row"><input [formControlName]="i" class="form-control" type="text"></th>
+                    <th scope="row"><button (click)="removeSubject(i)" type="button" class="btn btn-danger">Borrar</button></th>
+                  </tr>
+                  
+                </tbody>
+                <tbody  >
+                    <tr>
+                      <th scope="row"></th>
+                      <th scope="row"></th>
+                      <th scope="row"><button (click)="addSubject()" type="button" class="btn btn-success">Añadir</button></th>
+                    </tr>
+                    
+                  </tbody>
+                
+              </table>
+
+
+
+            <button type="submit" class="btn btn-primary">Registrar</button>
+<p>{{forma.status}}</p>
+        </form>
+    </div>
+</main>
